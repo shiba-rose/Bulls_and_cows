@@ -35,7 +35,9 @@ int main() {
                         case MenuResult::Game2:
                             start_game_2();
                             break;
-
+                        case MenuResult::Game3:
+                            start_game_duel();
+                            break;
                         case MenuResult::Again: 
                             continue;
                         case MenuResult::Exit: break;

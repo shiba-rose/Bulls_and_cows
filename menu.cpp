@@ -52,7 +52,7 @@ MenuResult menu() {
 
     } 
 
-    // если в cin пошло не то 
+    // если в cin пошло не что-то 
     else { 
         std::cout << std::endl;
         print_slow("Неверный выбор.", 1, 30);
@@ -71,7 +71,8 @@ MenuResult menu2() {
     std::string choice;
     std::cout << "1. Player Guess" << std::endl 
         << "2. Computer Guess" << std::endl 
-        << "3. Exit" << std::endl
+        << "3. Duel" << std::endl
+        << "4. Exit" << std::endl
         << std::endl; 
  
     std::cout << "Выберите действие: "; 
@@ -93,12 +94,19 @@ MenuResult menu2() {
     }
     else if (choice == "3") {
         std::cout << std::endl ;
+            print_slow("Начинаем дуэль...", 2, 30);
+
+        return MenuResult::Game3; // начинаем игру 
+
+    } 
+    
+        else if (choice == "4") {
+        std::cout << std::endl ;
             print_slow("Выход в главное меню...", 2, 30);
 
         return MenuResult::Exit; // конец игры, завершение 
 
     } 
-
     // если в cin пошло не то 
     else { 
         std::cout << std::endl;

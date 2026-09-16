@@ -23,7 +23,8 @@ enum class MenuResult {
     Again = 1,
     Play  = 2,
     Game1 = 3,
-    Game2 = 4
+    Game2 = 4,
+    Game3 = 5
 };
 
 // ===== Меню (menu.cpp) =====
@@ -33,3 +34,4 @@ MenuResult menu2();
 // ===== Игры (game.cpp) =====
 void start_game_1();
 void start_game_2();
+void start_game_duel();
