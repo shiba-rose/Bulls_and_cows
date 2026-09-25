@@ -95,6 +95,19 @@ std::string generate_number() { // функция для генерации сл
     return number;
 }
 
+bool check_bulls_and_cows_input(int bulls, int cows) {
+    if (bulls < 0 || bulls > 4) {
+        return false;
+    }
+    if (cows < 0 || cows > 4) {
+        return false;
+    }
+    if (bulls + cows > 4) {
+        return false;
+    }
+    return true;
+}
+
 
 bool check_number(std::string number) {// функция для проверки числа удовлетворяет ли оно условию игры
     if (number.length() != 4) {
@@ -239,9 +252,9 @@ void start_game_2(){
 
 }
 
+// Здесь логика игры_3
 void start_game_duel()
 {
-    // Здесь логика игры_3
     std::string computer_output_number {generate_number()};
     std::string user_input_number;
     std::vector<std::string> combinations {generate_all_combinations()};
@@ -250,24 +263,31 @@ void start_game_duel()
 
     print_slow(get_random_phrase(duel_start_phrases), 2, 5);
     print_slow("Загадай 4-значное число с уникальными цифрами: ", 1, 5);
-    bool flag {true};
-    while (flag) {
+    
+    bool number_guessed {false};
+    while (!number_guessed) {
+        print_slow("Загадал число?(     ",1,5);
+        print_slow("1 - да",1,5);
+        print_slow("2 - нет",1,5);
 
-        print_slow("Загадал число?(да/нет)     ",0,5);
-        std::string answer;
+        int answer;
         std::cin >> answer;
 
-        if (answer == "да"){
-            flag = false;
+        if (answer == 1){
+            number_guessed = true;
         }
-
         else{
             print_slow("Жду..........", 1, 30);   
         }   
     }
+
     print_slow(get_random_phrase(duel_first_move_phrases), 2, 5);
+
     while (computer_output_number != user_input_number) {
         print_slow("Введите число:", 2, 3);
+
+        user_input_number = get_player_guess();
+
         std::cin >> user_input_number;
 
         while (check_number(user_input_number) == false){
@@ -313,6 +333,14 @@ void start_game_duel()
             std::cin >> bulls_2;
             print_slow("Коров: ", 0, 5);
             std::cin >> cows_2;
+            while (!check_bulls_and_cows_input(bulls_2, cows_2)) {
+                std::cout << "Ошибка! Такое количество быков и коров невозможно.\n";
+                std::cout << "Введите заново: ";
+                 print_slow("Быков: ", 0, 5);
+                std::cin >> bulls_2;
+                print_slow("Коров: ", 0, 5);
+                std::cin >> cows_2;
+            }
             print_slow("============================", 1, 2);
             if (bulls_2 == 4){
                 print_slow("Твое число: ", 0, 5);
@@ -321,7 +349,6 @@ void start_game_duel()
                 print_slow("Спасибо за игру!",2,10);
                 break;
             }
-
             else{
                 print_slow(get_random_phrase(duel_after_player_phrases), 2, 5);
                 combinations = filter_combinations(combinations, computer_input_number, bulls_2,cows_2);
@@ -330,7 +357,6 @@ void start_game_duel()
                     print_slow("Начни игру заново...",2,10);
                     break;
                 }
-
                 else{
                     computer_input_number = combinations[rand() % combinations.size()];    
                 }

@@ -3,118 +3,82 @@
 #include <cstdlib>
 #include <ctime>
 
-
 #include "game.h"
 
-
-
 // функция main меню игры 
-MenuResult menu() { 
-
+MenuResult main_menu() { 
 
     // начальное меню 
+    print_slow("1. Начать игру");
+    print_slow("2. Инструкция");
+    print_slow("3. Выход",2) ;
+    print_slow("Выберите действие: ",0);
     std::string choice;
-    std::cout << "1. Начать игру" << std::endl 
-        << "2. Инструкция" << std::endl 
-        << "3. Выход" << std::endl 
-        << std::endl; 
- 
-    std::cout << "Выберите действие: "; 
     std::cin >> choice;
- 
+    std::cout << std::endl;
 
     // действия которые возможны 
+    //Начало игры
     if (choice == "1") { 
-        std::cout << std::endl; 
-        print_slow("Начинаем игру...", 2, 30);
-
-        return MenuResult::Play; // начинаем игру 
+        print_slow("Начинаем игру...", 2);
+        return MenuResult::play; // начинаем игру 
     } 
+    //Инструкция
     else if (choice == "2") { 
-        std::cout << std::endl; 
-        print_slow("ИНСТРУКЦИЯ:", 1, 5);
-        print_slow("В этой игре вам нужно угадать загаданное число.", 1, 5); 
-        print_slow("Вы должны вводить 4-значные числа с уникальными цифрами.", 1, 5); 
-        print_slow("После каждой попытки вы получите подсказку в виде количества быков и коров.", 1, 5); 
-        print_slow("Бык — правильная цифра стоит на правильном месте.", 1, 5); 
-        print_slow("Корова — правильная цифра есть, но стоит не на своём месте.", 1, 5); 
-        print_slow("Но также компьютер будет угадывать ваше число, и вы должны будете давать ему подсказки.", 1, 5); 
-        print_slow("Удачи!", 2, 30); 
-
-        return MenuResult::Again; // возвращаемся в меню
+        void print_instructions();
+        return MenuResult::again; // возвращаемся в меню
     } 
+    //Выход
     else if (choice == "3") {
-        std::cout << std::endl ;
-            print_slow("Выход из игры...", 2, 30);
-            print_slow("До свидания!", 2, 30);
-
-        return MenuResult::Exit; // конец игры, завершение 
-
+        print_slow("Выход из игры...");
+        print_slow("До свидания!", 2);
+        return MenuResult::exit; // конец игры, завершение 
     } 
-
     // если в cin пошло не что-то 
     else { 
-        std::cout << std::endl;
-        print_slow("Неверный выбор.", 1, 30);
-        print_slow("Пожалуйста, выберите 1, 2 или 3.", 2, 30);
-        std::cin.clear();
-        std::cin.ignore(1000, '\n');
-
-        return MenuResult::Again; // возвращаемся в меню
+        print_slow("Неверный выбор.");
+        print_slow("Пожалуйста, выберите 1, 2 или 3.", 2);
+        clearing_input();
+        return MenuResult::again; // возвращаемся в меню
     } 
 }
+// функция игрового меню игры 
+MenuResult play_menu() { 
 
-MenuResult menu2() { 
-
-
-    // начальное меню 
-    std::string choice;
-    std::cout << "1. Player Guess" << std::endl 
-        << "2. Computer Guess" << std::endl 
-        << "3. Duel" << std::endl
-        << "4. Exit" << std::endl
-        << std::endl; 
- 
+    // Игровое меню 
+    print_slow("1. Player Guess");
+    print_slow("2. Computer Guess");
+    print_slow("3. Duel");
+    print_slow("4. Exit", 2) ;
     std::cout << "Выберите действие: "; 
+    std::string choice;
     std::cin >> choice;
- 
+    std::cout << std::endl;
 
-    // действия которые возможны 
-    if (choice == "1") { 
-        std::cout << std::endl; 
-        print_slow("Начинаем игру против компьютера...", 2, 30);
-
-        return MenuResult::Game1; // начинаем игру 
+    // действия которые возможны
+    // выбор игры "Player Guess" 
+    if (choice == "1") {      
+        return MenuResult::game_player_guess; 
     } 
+    // выбор игры "Computer Guess
     else if (choice == "2") { 
-        std::cout << std::endl; 
-        print_slow("Начинаем игру против компьютера...", 2, 30);
-
-        return MenuResult::Game2; // начинаем игру 
+        return MenuResult::game_computer_guess;
     }
+    // выбор игры "Duel"
     else if (choice == "3") {
-        std::cout << std::endl ;
-            print_slow("Начинаем дуэль...", 2, 30);
-
-        return MenuResult::Game3; // начинаем игру 
-
+        return MenuResult::game_duel;  
     } 
-    
-        else if (choice == "4") {
-        std::cout << std::endl ;
-            print_slow("Выход в главное меню...", 2, 30);
-
-        return MenuResult::Exit; // конец игры, завершение 
+    // конец игры, завершение 
+    else if (choice == "4") {
+        print_slow("Выход в главное меню...", 2);
+        return MenuResult::exit; 
 
     } 
     // если в cin пошло не то 
     else { 
-        std::cout << std::endl;
-        print_slow("Неверный выбор.", 1, 30);
-        print_slow("Пожалуйста, выберите 1 или 2", 2, 30);
-        std::cin.clear();
-        std::cin.ignore(1000, '\n');
-
-        return MenuResult::Again; // возвращаемся в меню
+        print_slow("Неверный выбор.");
+        print_slow("Пожалуйста, выберите 1, 2, 3 или 4", 2);
+        clearing_input();
+        return MenuResult::again; // возвращаемся в меню
     } 
 }
