@@ -4,6 +4,7 @@
 #include <ctime>
 
 #include "game.h"
+#include "phrases.h"
 
 // функция main меню игры 
 MenuResult main_menu() { 

@@ -5,7 +5,7 @@
 
 
 #include "game.h"
-
+#include "phrases.h"
 
 
 int main() {
