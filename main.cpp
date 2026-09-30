@@ -1,21 +1,11 @@
-
 #include "game.h"
-
 
 int main() {
     srand(time(0));
-    print_slow("Загрузка игры...", 2, 30);
-
-    std::cout << "========================================" << std::endl;
-    print_slow("          Игра 'Быки и Коровы'          ");
-    std::cout << "========================================" << std::endl
-        << std::endl;
-
-    print_slow("Добро пожаловать в игру!", 2, 30);
+    print_greeting();
 
     // вызов функции меню и вызов самой игры 
-    
-    while (true) {
+    for (;;){
         switch(main_menu()) {
 
             case MenuResult::play: {

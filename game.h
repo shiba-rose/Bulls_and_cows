@@ -15,7 +15,9 @@
 //функции вывода
 void cin_clear();
 void print_slow(std::string text, int enter = 1, int delay = 3);
+void print_separator(char separator_symbol = '=', int separator_length = 40);
 std::string get_random_phrase(const std::vector<std::string>& phrases);
+void print_greeting();
 std::string output_main_menu();
 std::string output_play_menu();
 void print_instructions();

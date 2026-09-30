@@ -22,11 +22,27 @@ void print_slow(std::string text, int enter, int delay) { // функция дл
     }
 }
 
+// Функция вывода разделителя
+void print_separator(char separator_symbol, int separator_length){
+    std::string separator(separator_length, separator_symbol);
+    print_slow(separator);
+}
+
 // Функция выбора случайной фразы
 std::string get_random_phrase(const std::vector<std::string>& phrases) {
     return phrases[rand() % phrases.size()];
 }
 
+// Функция вывода приветствия
+void print_greeting(){
+    print_slow("Загрузка игры...", 2, 30);
+    print_separator();
+    print_slow("          Игра 'Быки и Коровы'          ");
+    print_separator();
+    std::cout << std::endl;
+    print_slow("Добро пожаловать в игру!", 2, 30);
+
+}
 
 // Вывод начального меню
 std::string output_main_menu(){
