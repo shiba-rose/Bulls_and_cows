@@ -1,14 +1,6 @@
-#include <iostream>
-#include <string>
-#include <thread>
-#include <chrono>
-#include <cstdlib>
-#include <ctime>
-#include <vector>
+
 
 #include "game.h"
-
-
 
 
 void print_slow(std::string text, int enter, int delay) { // функция для медленного вывода текста

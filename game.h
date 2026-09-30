@@ -2,8 +2,14 @@
 
 #include <string>
 #include <tuple>
-#include <vector>            
+#include <vector>  
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <thread>
+#include <chrono>
 
+#include "phrases.h"
 // ===== Утилиты (function.cpp) =====
 void print_slow(std::string text, int enter, int delay);
 std::string generate_number();
