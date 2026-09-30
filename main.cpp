@@ -16,12 +16,12 @@ int main() {
     // вызов функции меню и вызов самой игры 
     
     while (true) {
-        switch(menu()) {
+        switch(main_menu()) {
 
             case MenuResult::play: {
                 bool go_main_menu = false;
                 while (!go_main_menu) {
-                    switch (menu2()) {
+                    switch (play_menu()) {
 
                         case MenuResult::player_guess: 
                             start_player_guess();

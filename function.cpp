@@ -4,8 +4,14 @@
 
 #include "game.h"
 //1 функции вывода
+//Функция очистки ввода
+void cin_clear(){
+    std::cin.clear();
+    std::cin.ignore(1000, '\n');
+    print_slow("Неверный выбор.");
+}
 
-//  Функция посимвольного ввода
+//  Функция посимвольного вывода
 void print_slow(std::string text, int enter, int delay) { // функция для медленного вывода текста
     for (char c : text) {
         std::cout << c << std::flush;
@@ -21,6 +27,39 @@ std::string get_random_phrase(const std::vector<std::string>& phrases) {
     return phrases[rand() % phrases.size()];
 }
 
+
+// Вывод начального меню
+std::string output_main_menu(){
+    print_slow("1. Начать игру");
+    print_slow("2. Инструкция" );
+    print_slow("3. Выход",2);
+    print_slow("Выберите действие: ",0); 
+    
+    std::string choice;
+    std::cin >> choice;
+    return choice;    
+}
+
+// Вывод игрового меню
+std::string output_play_menu(){
+    print_slow("1. Player Guess");
+    print_slow("2. Computer Guess" );
+    print_slow("3. Duel");
+    print_slow("4. Exit", 2);
+    print_slow("Выберите действие: ",0); 
+
+    std::string choice;
+    std::cin >> choice;
+    return choice;
+}
+
+// Функция вывода инструкции
+void print_instructions(){
+    for (const std::string& phrase : instructions){
+        print_slow(phrase);
+    } 
+    std::cout << std::endl;
+}
 //2 Функции алгоритмы для игр
 
 // Функция для генерации случайного числа

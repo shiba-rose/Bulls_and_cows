@@ -13,8 +13,12 @@
 // ===== Утилиты (function.cpp) =====
 
 //функции вывода
+void cin_clear();
 void print_slow(std::string text, int enter = 1, int delay = 3);
 std::string get_random_phrase(const std::vector<std::string>& phrases);
+std::string output_main_menu();
+std::string output_play_menu();
+void print_instructions();
 
 // Функции алгоритмы для игр
 std::string generate_number();
@@ -41,8 +45,8 @@ enum class MenuResult {
 };
 
 // ===== Меню (menu.cpp) =====
-MenuResult menu();
-MenuResult menu2();
+MenuResult main_menu();
+MenuResult play_menu();
 
 // ===== Игры (game.cpp) =====
 void start_player_guess();
