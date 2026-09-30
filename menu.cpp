@@ -23,7 +23,7 @@ MenuResult menu() {
         std::cout << std::endl; 
         print_slow("Начинаем игру...", 2);
 
-        return MenuResult::Play; // начинаем игру 
+        return MenuResult::play; // начинаем игру 
     } 
     else if (choice == "2") { 
         std::cout << std::endl; 
@@ -36,14 +36,14 @@ MenuResult menu() {
         print_slow("Но также компьютер будет угадывать ваше число, и вы должны будете давать ему подсказки."); 
         print_slow("Удачи!", 2); 
 
-        return MenuResult::Again; // возвращаемся в меню
+        return MenuResult::again; // возвращаемся в меню
     } 
     else if (choice == "3") {
         std::cout << std::endl ;
             print_slow("Выход из игры...", 1, 30);
             print_slow("До свидания!", 2, 30);
 
-        return MenuResult::Exit; // конец игры, завершение 
+        return MenuResult::exit; // конец игры, завершение 
 
     } 
 
@@ -55,7 +55,7 @@ MenuResult menu() {
         std::cin.clear();
         std::cin.ignore(1000, '\n');
 
-        return MenuResult::Again; // возвращаемся в меню
+        return MenuResult::again; // возвращаемся в меню
     } 
 }
 
@@ -78,19 +78,19 @@ MenuResult menu2() {
         std::cout << std::endl; 
         print_slow("Начинаем игру против компьютера...", 2);
 
-        return MenuResult::Game1; // начинаем игру 
+        return MenuResult::player_guess; // начинаем игру 
     } 
     else if (choice == "2") { 
         std::cout << std::endl; 
         print_slow("Начинаем игру против компьютера...", 2);
 
-        return MenuResult::Game2; // начинаем игру 
+        return MenuResult::computer_guess; // начинаем игру 
     }
     else if (choice == "3") {
         std::cout << std::endl ;
             print_slow("Начинаем дуэль...", 2);
 
-        return MenuResult::Game3; // начинаем игру 
+        return MenuResult::game_duel; // начинаем игру 
 
     } 
     
@@ -98,7 +98,7 @@ MenuResult menu2() {
         std::cout << std::endl ;
             print_slow("Выход в главное меню...", 2);
 
-        return MenuResult::Exit; // конец игры, завершение 
+        return MenuResult::exit; // конец игры, завершение 
 
     } 
     // если в cin пошло не то 
@@ -109,6 +109,6 @@ MenuResult menu2() {
         std::cin.clear();
         std::cin.ignore(1000, '\n');
 
-        return MenuResult::Again; // возвращаемся в меню
+        return MenuResult::again; // возвращаемся в меню
     } 
 }

@@ -2,7 +2,6 @@
 #include "game.h"
 
 
-
 int main() {
     srand(time(0));
     print_slow("Загрузка игры...", 2, 30);
@@ -19,23 +18,23 @@ int main() {
     while (true) {
         switch(menu()) {
 
-            case MenuResult::Play: {
+            case MenuResult::play: {
                 bool go_main_menu = false;
                 while (!go_main_menu) {
                     switch (menu2()) {
 
-                        case MenuResult::Game1: 
-                            start_game_1();
+                        case MenuResult::player_guess: 
+                            start_player_guess();
                             break; 
-                        case MenuResult::Game2:
-                            start_game_2();
+                        case MenuResult::computer_guess:
+                            start_computer_guess();
                             break;
-                        case MenuResult::Game3:
+                        case MenuResult::game_duel:
                             start_game_duel();
                             break;
-                        case MenuResult::Again: 
+                        case MenuResult::again: 
                             continue;
-                        case MenuResult::Exit: break;
+                        case MenuResult::exit: break;
                         default: break; 
                     }
                     go_main_menu = true; 
@@ -43,8 +42,8 @@ int main() {
                 continue;
             }
                 // после игры отправляет в меню снова чтобы начать новую или выйти из игры
-            case MenuResult::Exit: return 0; // завершение программы полностью 
-            case MenuResult::Again: continue; // повторение при вызове меню снова, например при ошибке 
+            case MenuResult::exit: return 0; // завершение программы полностью 
+            case MenuResult::again: continue; // повторение при вызове меню снова, например при ошибке 
             default: return 0; 
         }
     }

@@ -1,80 +1,7 @@
-
-
 #include "game.h"
 
 
-std::string get_random_phrase(const std::vector<std::string>& phrases) {
-    return phrases[rand() % phrases.size()];
-}
-
-std::string generate_number() { // функция для генерации случайного числа
-    std::string number;
-    while (number.length() < 4){
-        char digit = rand() % 10;
-
-        if (number.empty() && digit == 0){
-            continue; // пропускаем ведущий ноль
-        }
-        if (number.find('0' +digit) == std::string::npos){
-            number += '0' + digit;
-        }
-    }
-    return number;
-}
-
-
-bool check_number(std::string number) {// функция для проверки числа удовлетворяет ли оно условию игры
-    if (number.length() != 4) {
-        return false;
-    }
-
-    if (number[0] == '0'){
-        return false;
-    }
-
-    for (char c : number){
-        if (!isdigit(c)){
-            return false;
-        }
-
-    }
-    if (number[0] == number[1] || number[0] == number[2] || number[0] == number[3] ||
-        number[1] == number[2] || number[1] == number[3] ||
-        number[2] == number[3]) {
-        return false;
-    }
-    return true;
-}
-
-std::tuple<int,int> check_bulls_and_cows(std::string secret_number, std::string player_number){
-    int bulls {0};
-    int cows {0};
-    
-    // Проверка быков
-    for (int i {0}; i<4; ++i){
-        if(secret_number[i] == player_number[i]){
-            ++bulls;
-            player_number[i] ='B';
-        }
-    }
-
-    // Проверяем коров
-    for(int i {0}; i<4; ++i){
-        if (player_number[i] == 'B'){
-            continue;
-        }
-        if (secret_number.find(player_number[i]) != std::string::npos){
-            ++cows;
-        }
-    }
-    return {bulls, cows};
-
-
-}
-
-
-
-void start_game_1() {
+void start_player_guess() {
     // Здесь логика игры_1
     std::string computer_output_number {generate_number()};
     std::string user_input_number;
@@ -112,7 +39,7 @@ void start_game_1() {
 }
 
 
-void start_game_2(){
+void start_computer_guess(){
     // Здесь логика игры_2
     std::vector<std::string> combinations {generate_all_combinations()};
     std::string computer_input_number = combinations[rand() % combinations.size()];
