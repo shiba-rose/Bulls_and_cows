@@ -157,11 +157,12 @@ std::tuple<int,int> check_bulls_and_cows(std::string secret_number, std::string 
 std::string input_player_number(){
     std::string user_input_number;
     print_demarcation();
+    print_slow("                  ТВОЙ ХОД");
     print_slow("Введите число:");
     std::cout << std::endl;
     std::cin >> user_input_number;
 
-    while (check_number(user_input_number)){
+    while (!check_number(user_input_number)){
         print_demarcation();
         print_slow("Неверный ввод. Пожалуйста, введите 4-значное число с уникальными цифрами:");
         std::cout << std::endl;
@@ -171,21 +172,16 @@ std::string input_player_number(){
     if (user_input_number == "1234"){
         print_demarcation();
             print_slow("А что-то поумнее выдумать можешь чем 1234..........................ладно сойдёт", 2, 30);
-            print_demarcation();
      }
 
     return user_input_number; 
 }
 
 bool check_user_win(int bulls, int cows){
-    print_demarcation();
-    print_slow("          ТВОЙ ХОД");
-    print_demarcation();
     print_slow("Быков: ", 0);
     std::cout << bulls << std::endl;;
     print_slow("Коров: ", 0);
     std::cout << cows << std::endl;
-    print_demarcation();
 
     if (bulls == 4){
         print_slow(get_random_phrase(duel_player_win_phrases), 1);
@@ -215,17 +211,14 @@ print_slow("Загадай 4-значное число с уникальными
 
 std::tuple<int,int> check_computer_win(std::string computer_input_number){
     print_demarcation();
-    print_slow("      ХОД КОМПЬЮТЕРА");
-    print_demarcation();
+    print_slow("                  ХОД КОМПЬЮТЕРА");
     print_slow("Число компьютера: ", 0);
     std::cout << computer_input_number << std::endl;
     int bulls, cows;
     print_slow("Быков: ", 0);
     std::cin >> bulls;
-    std::cout <<  std::endl;
     print_slow("Коров: ", 0);
     std::cin >> cows;
-    std::cout <<  std::endl;
     while (!check_bulls_and_cows_input(bulls, cows)) {
         print_slow("Ошибка! Такое количество быков и коров невозможно.");
         print_slow("Введите заново:");
@@ -236,7 +229,6 @@ std::tuple<int,int> check_computer_win(std::string computer_input_number){
         print_slow("Коров: ", 0);
         std::cin >> cows;
         std::cout <<  std::endl;
-    print_demarcation();
         }
 
     if (bulls == 4){

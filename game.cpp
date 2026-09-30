@@ -16,6 +16,7 @@ void start_game_1() {
     
     for(;;){ 
         int bulls, cows;
+
         std::string user_input_number {input_player_number()};
         std::tie(bulls, cows) = check_bulls_and_cows(computer_output_number, user_input_number);
 

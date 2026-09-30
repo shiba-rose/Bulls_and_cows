@@ -26,7 +26,7 @@ MenuResult main_menu() {
     } 
     //Инструкция
     else if (choice == "2") { 
-        void print_instructions();
+        print_instructions();
         return MenuResult::again; // возвращаемся в меню
     } 
     //Выход
