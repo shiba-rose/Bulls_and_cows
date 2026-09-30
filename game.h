@@ -11,7 +11,9 @@
 
 #include "phrases.h"
 // ===== Утилиты (function.cpp) =====
-void print_slow(std::string text, int enter, int delay);
+//функции вывода
+void print_slow(std::string text, int enter = 1, int delay = 3);
+
 std::string generate_number();
 bool check_number(std::string number);
 std::tuple<int, int> check_bulls_and_cows(std::string secret, std::string player);

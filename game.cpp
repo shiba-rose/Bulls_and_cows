@@ -80,11 +80,11 @@ void start_game_1() {
     std::string user_input_number;
 
     while (computer_output_number != user_input_number) {
-        print_slow("Введите число:", 2, 3);
+        print_slow("Введите число:", 2);
         std::cin >> user_input_number;
 
         while (check_number(user_input_number) == false){
-            print_slow("Неверный ввод. Пожалуйста, введите 4-значное число с уникальными цифрами:", 2, 3);
+            print_slow("Неверный ввод. Пожалуйста, введите 4-значное число с уникальными цифрами:", 2);
             std::cin.clear();
             std::cin.ignore(1000, '\n');
             std::cin >> user_input_number;
@@ -95,15 +95,15 @@ void start_game_1() {
         std::tie(bulls, cows) = check_bulls_and_cows(computer_output_number, user_input_number);
 
         std::cout << std::endl;
-        print_slow("Быков: ", 0, 10);
+        print_slow("Быков: ", 0);
         std::cout << bulls << std::endl;;
-        print_slow("Коров: ", 0, 10);
+        print_slow("Коров: ", 0);
         std::cout << cows << std::endl;
         
         if (bulls == 4){
-            print_slow("Поздравляю!", 1, 5);
-            print_slow("Ты победил!", 1, 5);
-            print_slow("Отличная работа! Ты угадал загаданное число!", 3, 5);
+            print_slow("Поздравляю!");
+            print_slow("Ты победил!");
+            print_slow("Отличная работа! Ты угадал загаданное число!", 3);
         }
 
 
@@ -117,11 +117,11 @@ void start_game_2(){
     std::vector<std::string> combinations {generate_all_combinations()};
     std::string computer_input_number = combinations[rand() % combinations.size()];
     std::string user_output_number;
-    print_slow("Загадай 4-значное число с уникальными цифрами: ", 1, 5);
+    print_slow("Загадай 4-значное число с уникальными цифрами: ");
     bool flag {true};
     while (flag) {
 
-        print_slow("Загадал число?(да/нет)     ",0,5);
+        print_slow("Загадал число?(да/нет)     ",0);
         std::string answer;
         std::cin >> answer;
 
@@ -130,31 +130,31 @@ void start_game_2(){
         }
 
         else{
-            print_slow("Жду..........", 1, 30);   
+            print_slow("Жду..........");   
         }   
     }
      while (true){
-        print_slow("Твое число: ", 0, 5);
+        print_slow("Твое число: ", 0);
         std::cout << computer_input_number << std::endl;
         int bulls;
         int cows;
-        print_slow("Быков: ", 0, 5);
+        print_slow("Быков: ", 0);
         std::cin >> bulls;
-        print_slow("Коров: ", 0, 5);
+        print_slow("Коров: ", 0);
         std::cin >> cows;
 
         if (bulls == 4){
-            print_slow("Твое число: ", 0, 5);
+            print_slow("Твое число: ", 0);
             std::cout << computer_input_number << std::endl;
-            print_slow("Спасибо за игру!",2,10);
+            print_slow("Спасибо за игру!",2);
             break;
         }
 
         else{
             combinations = filter_combinations(combinations, computer_input_number, bulls,cows);
             if (combinations.empty()){
-                print_slow("Ты где то ошибся!!!",2,10);
-                print_slow("Начни игру заново...",2,10);
+                print_slow("Ты где то ошибся!!!",2);
+                print_slow("Начни игру заново...",2);
                 break;
             }
 
@@ -175,12 +175,12 @@ void start_game_duel()
     std::string computer_input_number = combinations[rand() % combinations.size()];
     std::string user_output_number;
 
-    print_slow(get_random_phrase(duel_start_phrases), 2, 5);
-    print_slow("Загадай 4-значное число с уникальными цифрами: ", 1, 5);
+    print_slow(get_random_phrase(duel_start_phrases), 2);
+    print_slow("Загадай 4-значное число с уникальными цифрами: ");
     bool flag {true};
     while (flag) {
 
-        print_slow("Загадал число?(да/нет)     ",0,5);
+        print_slow("Загадал число?(да/нет)     ",0);
         std::string answer;
         std::cin >> answer;
 
@@ -192,9 +192,9 @@ void start_game_duel()
             print_slow("Жду..........", 1, 30);   
         }   
     }
-    print_slow(get_random_phrase(duel_first_move_phrases), 2, 5);
+    print_slow(get_random_phrase(duel_first_move_phrases), 2);
     while (computer_output_number != user_input_number) {
-        print_slow("Введите число:", 2, 3);
+        print_slow("Введите число:", 2);
         std::cin >> user_input_number;
 
         while (check_number(user_input_number) == false){
@@ -211,50 +211,51 @@ void start_game_duel()
         int bulls_1;
         int cows_1;
         std::tie(bulls_1, cows_1) = check_bulls_and_cows(computer_output_number, user_input_number);
-        print_slow("============================", 1, 2);
-        print_slow("          ТВОЙ ХОД", 1, 2);
-        print_slow("============================", 1, 2);
-        print_slow("Твоё число: ", 0, 5);
+        std::cout << std::endl;
+        print_slow("============================");
+        print_slow("          ТВОЙ ХОД");
+        print_slow("============================");
+        print_slow("Твоё число: ", 0);
         std::cout << user_input_number << std::endl;
         std::cout << std::endl;
-        print_slow("Быков: ", 0, 10);
+        print_slow("Быков: ", 0);
         std::cout << bulls_1 << std::endl;;
-        print_slow("Коров: ", 0, 10);
+        print_slow("Коров: ", 0);
         std::cout << cows_1 << std::endl;
-        print_slow("============================", 1, 2);
+        print_slow("============================",2);
 
         if (bulls_1 == 4){
-            print_slow(get_random_phrase(duel_player_win_phrases), 1, 5);
-            print_slow("Отличная работа! Ты угадал загаданное число!", 3, 5);
+            print_slow(get_random_phrase(duel_player_win_phrases));
+            print_slow("Отличная работа! Ты угадал загаданное число!", 3);
         }
         else{
-            print_slow(get_random_phrase(duel_turn_phrases),1,5);
-            print_slow("============================", 1, 2);
-            print_slow("      ХОД КОМПЬЮТЕРА", 1, 2);
-            print_slow("============================", 1, 2);
-            print_slow("Компьютер назвал: ", 0, 5);
+            print_slow(get_random_phrase(duel_turn_phrases),2);
+            print_slow("============================");
+            print_slow("      ХОД КОМПЬЮТЕРА");
+            print_slow("============================");
+            print_slow("Компьютер назвал: ", 0);
             std::cout << computer_input_number << std::endl;
             int bulls_2;
             int cows_2;
-            print_slow("Быков: ", 0, 5);
+            print_slow("Быков: ", 0);
             std::cin >> bulls_2;
-            print_slow("Коров: ", 0, 5);
+            print_slow("Коров: ", 0);
             std::cin >> cows_2;
-            print_slow("============================", 1, 2);
+            print_slow("============================",2);
             if (bulls_2 == 4){
-                print_slow("Твое число: ", 0, 5);
+                print_slow("Твое число: ", 0);
                 std::cout << computer_input_number << std::endl;
-                print_slow(get_random_phrase(duel_computer_win_phrases),1,5);
-                print_slow("Спасибо за игру!",2,10);
+                print_slow(get_random_phrase(duel_computer_win_phrases));
+                print_slow("Спасибо за игру!",2);
                 break;
             }
 
             else{
-                print_slow(get_random_phrase(duel_after_player_phrases), 2, 5);
+                print_slow(get_random_phrase(duel_after_player_phrases), 2);
                 combinations = filter_combinations(combinations, computer_input_number, bulls_2,cows_2);
                 if (combinations.empty()){
-                    print_slow("Ты где то ошибся!!!",2,10);
-                    print_slow("Начни игру заново...",2,10);
+                    print_slow("Ты где то ошибся!!!",2);
+                    print_slow("Начни игру заново...",2);
                     break;
                 }
 

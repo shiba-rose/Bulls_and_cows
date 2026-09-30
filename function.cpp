@@ -1,7 +1,7 @@
 
 
 #include "game.h"
-
+//функции вывода
 
 void print_slow(std::string text, int enter, int delay) { // функция для медленного вывода текста
     for (char c : text) {
