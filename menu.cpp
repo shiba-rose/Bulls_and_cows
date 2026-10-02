@@ -17,6 +17,9 @@ MenuResult main_menu() {
     } 
 
     else if (choice == "3") {
+        return MenuResult::settings;
+    }
+    else if (choice == "4") {
         print_slow("До свидания!", 1, 30);
         print_slow("Выход из игры...", 2, 30);
         return MenuResult::exit; // конец игры, завершение 

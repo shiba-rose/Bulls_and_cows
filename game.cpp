@@ -10,7 +10,7 @@ void start_player_guess() {
         std::tie(bulls, cows) = check_bulls_and_cows(computer_output_number, user_input_number);
         print_user_result(user_input_number, bulls, cows);
         
-        if (bulls == 4){
+        if (bulls == number_length){
             print_slow(get_random_phrase(duel_player_win_phrases));
         }
     }
@@ -26,7 +26,7 @@ void start_computer_guess(){
         std::string computer_input_number = combinations[rand() % combinations.size()];
         auto [bulls, cows] = print_computer_result(computer_input_number);
 
-        if (bulls == 4){
+        if (bulls == number_length){
             print_slow(get_random_phrase(duel_computer_win_phrases));
             break;
         }
@@ -54,7 +54,7 @@ void start_game_duel()
         std::tie(bulls, cows) = check_bulls_and_cows(computer_output_number, user_input_number);
         print_user_result(user_input_number, bulls, cows);
         
-        if (bulls == 4){
+        if (bulls == number_length){
             print_slow(get_random_phrase(duel_player_win_phrases));
             std::cout << std::endl;
             break;
@@ -65,7 +65,7 @@ void start_game_duel()
         std::string computer_input_number = combinations[rand() % combinations.size()];
         auto [bulls, cows] = print_computer_result(computer_input_number);
 
-        if (bulls == 4){
+        if (bulls == number_length){
             print_slow(get_random_phrase(duel_computer_win_phrases));
             std::cout << std::endl;
             break;

@@ -48,7 +48,8 @@ void print_greeting(){
 std::string output_main_menu(){
     print_slow("1. Начать игру");
     print_slow("2. Инструкция" );
-    print_slow("3. Выход",2);
+    print_slow("3. Настройки");
+    print_slow("4. Выход",2);
     print_slow("Выберите действие: ",0); 
     
     std::string choice;
@@ -69,6 +70,52 @@ std::string output_play_menu(){
     return choice;
 }
 
+
+//Функция настроек
+void settings_menu() {
+    for (;;) {
+        print_separator();
+        print_slow("             НАСТРОЙКИ");
+        print_separator();
+        print_slow(
+            "Количество цифр в числе: "
+            + std::to_string(number_length)
+        );
+        print_slow("Введите количество цифр от 1 до 10.");
+        print_slow("Для выхода в главное меню введите 0.");
+        print_slow("Ваш выбор: ", 0);
+
+        int choice;
+
+        if (!(std::cin >> choice)) {
+            cin_clear();
+            print_slow("Пожалуйста, введите число.", 2);
+            continue;
+        }
+
+        if (choice == 0) {
+            return;
+        }
+
+        if (choice >= 1 && choice <= 10) {
+            number_length = choice;
+
+            print_slow(
+                "Количество цифр установлено: "
+                + std::to_string(number_length),
+                2
+            );
+
+            return;
+        }
+
+        print_slow(
+            "Пожалуйста, выберите значение от 1 до 10.",
+            2
+        );
+    }
+}
+
 // Функция вывода инструкции
 void print_instructions(){
     for (const std::string& phrase : instructions){
@@ -81,7 +128,7 @@ void print_instructions(){
 // Функция для генерации случайного числа
 std::string generate_number() { 
     std::string number;
-    while (number.length() < 4){
+    while (number.length() < number_length){
         char digit = rand() % 10;
 
         if (number.empty() && digit == 0){
@@ -96,7 +143,7 @@ std::string generate_number() {
 
 // Функция для проверки числа, удовлетворяет ли оно условию игры
 bool check_number(std::string number) {
-    if (number.length() != 4) {
+    if (number.length() != number_length) {
         return false;
     }
 
@@ -110,10 +157,12 @@ bool check_number(std::string number) {
         }
 
     }
-    if (number[0] == number[1] || number[0] == number[2] || number[0] == number[3] ||
-        number[1] == number[2] || number[1] == number[3] ||
-        number[2] == number[3]) {
-        return false;
+    for (int i = 0; i < number.length(); ++i) {
+        for (int j = i + 1; j < number.length(); ++j) {
+            if (number[i] == number[j]) {
+                return false;
+            }
+        }
     }
     return true;
 }
@@ -121,18 +170,18 @@ bool check_number(std::string number) {
 // Функция создания массива со всеми возможными комбинациями
 std::vector<std::string> generate_all_combinations() {
     std::vector<std::string> combinations;
+    int start = 1;
 
-    for (int i = 1023; i <= 9876; ++i) {
+    for (int i = 1; i < number_length; ++i) {
+        start *= 10;
+    }
+
+    int end = start * 10 - 1;
+
+    for (int i = start; i <= end; ++i) {
         std::string number = std::to_string(i);
 
-        if (number.length() == 4 &&
-            number[0] != number[1] &&
-            number[0] != number[2] &&
-            number[0] != number[3] &&
-            number[1] != number[2] &&
-            number[1] != number[3] &&
-            number[2] != number[3]) {
-
+        if (check_number(number)) {
             combinations.push_back(number);
         }
     }
@@ -146,7 +195,7 @@ std::tuple<int,int> check_bulls_and_cows(std::string secret_number, std::string 
     int cows {0};
     
     // Проверка быков
-    for (int i {0}; i<4; ++i){
+    for (int i {0}; i<number_length; ++i){
         if(secret_number[i] == player_number[i]){
             ++bulls;
             player_number[i] ='B';
@@ -154,7 +203,7 @@ std::tuple<int,int> check_bulls_and_cows(std::string secret_number, std::string 
     }
 
     // Проверяем коров
-    for(int i {0}; i<4; ++i){
+    for(int i {0}; i<number_length; ++i){
         if (player_number[i] == 'B'){
             continue;
         }
@@ -198,7 +247,7 @@ std::string get_valid_number(){
 
         while (!check_number(user_input_number)){
             cin_clear();
-            print_slow("Пожалуйста, введите 4-значное число с уникальными цифрами:", 0);
+            print_slow(std::format("Пожалуйста, введите {}-значное число с уникальными цифрами:", number_length), 0);
             std::cin >> user_input_number;
         }
     return user_input_number;
@@ -221,7 +270,7 @@ void print_user_result(std::string user_input_number, int bulls, int cows){
 
 
 void is_number_guessed(){
-    print_slow("Загадай 4-значное число с уникальными цифрами: ");
+    print_slow(std::format("Загадай {}-значное число с уникальными цифрами: ", number_length), 0);
     for(;;) {
         print_slow("Загадал число?(yes/no)     ",0);
         std::string answer;
@@ -239,7 +288,7 @@ void is_number_guessed(){
 
 
 bool is_valid_bulls_and_cows(int bulls, int cows){
-    if (bulls < 0 || bulls > 4 || cows < 0 || cows > 4 || (bulls + cows) > 4){
+    if (bulls < 0 || bulls > number_length || cows < 0 || cows > number_length || (bulls + cows) > number_length){
         return false;
     }
     return true;
