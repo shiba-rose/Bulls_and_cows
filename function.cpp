@@ -8,7 +8,7 @@
 void cin_clear(){
     std::cin.clear();
     std::cin.ignore(1000, '\n');
-    print_slow("Неверный выбор.");
+    print_slow("Неверный ввод.");
 }
 
 //  Функция посимвольного вывода
@@ -189,4 +189,107 @@ std::vector<std::string> filter_combinations(
     }
 
     return result;
+}
+
+std::string get_valid_number(){
+    std::string user_input_number;
+     print_slow("Введите число:", 0);
+        std::cin >> user_input_number;
+
+        while (!check_number(user_input_number)){
+            cin_clear();
+            print_slow("Пожалуйста, введите 4-значное число с уникальными цифрами:", 0);
+            std::cin >> user_input_number;
+        }
+    return user_input_number;
+}
+
+void print_user_result(std::string user_input_number, int bulls, int cows){
+    std::cout << std::endl;
+    print_separator();
+    print_slow("               ТВОЙ ХОД");
+    print_separator();
+    print_slow("Твоё число: ", 0);
+    std::cout << user_input_number << std::endl;
+    print_slow("Быков: ", 0);
+    std::cout << bulls << std::endl;;
+    print_slow("Коров: ", 0);
+    std::cout << cows << std::endl;
+    print_separator();
+    std::cout << std::endl;
+}
+
+
+void is_number_guessed(){
+    print_slow("Загадай 4-значное число с уникальными цифрами: ");
+    for(;;) {
+        print_slow("Загадал число?(yes/no)     ",0);
+        std::string answer;
+        std::cin >> answer;
+
+        if (answer == "yes"){
+            break;
+        }
+
+        else{
+            print_slow("Жду..........");   
+        }   
+    }       
+}
+
+
+bool is_valid_bulls_and_cows(int bulls, int cows){
+    if (bulls < 0 || bulls > 4 || cows < 0 || cows > 4 || (bulls + cows) > 4){
+        return false;
+    }
+    return true;
+}
+
+std::pair<int, int> print_computer_result(std::string computer_input_number){
+    std::cout << std::endl;
+    int bulls{-1};
+    int cows{-1};
+    print_separator();
+    print_slow("           ХОД КОМПЬЮТЕРА");
+    print_separator();
+    print_slow("Компьютер назвал: ", 0);
+    std::cout << computer_input_number << std::endl;
+    for (;;) {
+        
+        print_slow("Введите количество быков: ", 0);
+         if (!(std::cin >> bulls)) {
+            std::cout << std::endl;
+            cin_clear();
+            print_slow("Пожалуйста, введите число:", 0);
+            continue;
+        }   
+
+        print_slow("Введите количество коров: ", 0);
+        if (!(std::cin >> cows)) {
+            std::cout << std::endl;
+            cin_clear();
+            print_slow("Пожалуйста, введите число.");
+            continue;
+        }
+
+        if (!is_valid_bulls_and_cows(bulls, cows)){
+            std::cout << std::endl;
+            print_slow(" Пожалуйста, введите корректные значения быков и коров.", 2, 3);
+            continue;
+        }
+        break;
+    }
+    print_separator();
+    std::cout << std::endl;
+    return {bulls, cows};
+}
+
+
+bool is_combinations_empty(std::vector<std::string> combinations){
+    if (combinations.empty()){
+        print_slow("Ты где то ошибся!!!");
+        print_slow("Начни игру заново...",2);
+        return true;
+    }
+    return false;
 }

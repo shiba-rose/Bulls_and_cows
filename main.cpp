@@ -1,5 +1,5 @@
 #include "game.h"
-
+int number_length = 4;
 int main() {
     srand(time(0));
     print_greeting();

@@ -8,8 +8,10 @@
 #include <ctime>
 #include <thread>
 #include <chrono>
+#include <utility>
 
 #include "phrases.h"
+extern int number_length;
 // ===== Утилиты (function.cpp) =====
 
 //функции вывода
@@ -33,9 +35,12 @@ std::vector<std::string> filter_combinations(
     int bulls,
     int cows
 );
-
-
-
+std::string get_valid_number();
+void print_user_result(std::string user_input_number, int bulls, int cows);
+void is_number_guessed();
+bool is_valid_bulls_and_cows(int bulls, int cows);
+std::pair<int, int> print_computer_result(std::string computer_input_number);
+bool is_combinations_empty(std::vector<std::string> combinations);
 // ===== Общий enum =====
 enum class MenuResult {
     exit  = 0,
@@ -43,7 +48,8 @@ enum class MenuResult {
     play  = 2,
     player_guess = 3,
     computer_guess = 4,
-    game_duel = 5
+    game_duel = 5,
+    settings = 6
 };
 
 // ===== Меню (menu.cpp) =====

@@ -24,7 +24,7 @@ MenuResult main_menu() {
 
     // если в cin пошло не что-то 
     else { 
-        void cin_clear();
+        cin_clear();
         print_slow("Пожалуйста, выберите 1, 2 или 3.", 2);
         return MenuResult::again; // возвращаемся в меню
     } 
